@@ -2,6 +2,12 @@ lvim.colorscheme = "dracula"
 
 lvim.plugins = {
   {
+    "liangxianzhe/nap.nvim", 
+    config = function()
+    require("nap").setup()
+        end,
+  },
+  {
     "zbirenbaum/copilot.lua",
     cmd = "Copilot",
     event = "InsertEnter",
