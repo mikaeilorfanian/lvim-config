@@ -1,7 +1,7 @@
 lvim.colorscheme = "dracula"
 
 lvim.plugins = {
-  {
+  { -- Quickly jump between next and previous NeoVim buffer, tab, file, quickfix, diagnostic, etc.
     "liangxianzhe/nap.nvim", 
     config = function()
     require("nap").setup()
@@ -41,11 +41,11 @@ lvim.plugins = {
       vim.cmd ("let g:minimap_auto_start_win_enter = 1")
     end,
   },
-  "nvim-neotest/neotest",
-  "nvim-neotest/neotest-python",
+  -- "nvim-neotest/neotest",
+  -- "nvim-neotest/neotest-python",
   'Mofiqul/dracula.nvim',
   {'tanvirtin/monokai.nvim'},
-  { "folke/trouble.nvim", cmd = "TroubleToggle" },
+  { "folke/trouble.nvim", cmd = "TroubleToggle" }, -- A pretty list for showing diagnostics, references, telescope results, quickfix and location lists
   {
     "smoka7/hop.nvim",
     event = "BufRead",
@@ -65,13 +65,19 @@ lvim.plugins = {
   {
     "folke/persistence.nvim",
       event = "BufReadPre",
-      module = "persistence",
+      -- module = "persistence",
+      lazy = true,
       config = function()
         require("persistence").setup {
           dir = vim.fn.expand(vim.fn.stdpath "config" .. "/session/"),
           options = { "buffers", "curdir", "tabpages", "winsize" },
         }
     end,
+  },
+  {
+    "ThePrimeagen/harpoon",
+    branch = "harpoon2",
+    dependencies = { "nvim-lua/plenary.nvim" }
   },
 }
 
@@ -122,4 +128,7 @@ vim.keymap.set('n', 'gd', 'gdzz')
 vim.keymap.set('n', '<C-o>', '<C-o>zz')
 vim.opt.relativenumber = true
 vim.opt.scrolloff = 20
-vim.opt.updatetime = 300
+vim.opt.updatetime = 200
+
+local harpoon = require("harpoon")
+harpoon:setup()
